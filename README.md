@@ -152,12 +152,13 @@ foreach ($client->messages()->list(['status' => 'delivered']) as $message) {
 }
 ```
 
-`page()` and `list()` accept the same filters: `status`, `from`, `to`, `limit`, `cursor`.
+`page()` and `list()` accept the same filters: `status`, `search`, `from`, `to`, `limit`, `cursor`.
 
-Fetch a single message by id:
+Fetch a single message with its full event timeline, by id or by the idempotency key from the original send:
 
 ```php
-$message = $client->messages()->get('msg_123');
+$message = $client->messages()->get(['id' => 'msg_123']);
+$message = $client->messages()->get(['idempotency_key' => 'order-42']);
 ```
 
 ## Webhook verification
